@@ -23,12 +23,23 @@
 		destroy-method="close">
 		<property name="zkClient" ref="thriftZookeeper" />
 	</bean>
-	<bean id="smartServiceImpl" class="com.smart.thrift.service.impl.SmartServiceImpl" />
+	
+	<bean id="smartService" class="com.smart.thrift.service.impl.SmartServiceImpl" />
+	<bean id="helloService" class="com.smart.thrift.service.impl.HelloServiceImpl" />
 
-	<bean id="smartService" class="com.smart.thrift.server.ThriftServiceServerFactory"
+	<bean  class="com.smart.thrift.server.ThriftServiceServerFactory"
 		destroy-method="close">
-		<property name="service" ref="smartServiceImpl" />
+		<property name="service" ref="smartService" />
 		<property name="port" value="9000" />
+		<property name="version" value="1.0.0" />
+		<property name="weight" value="1" />
+		<property name="thriftServerAddressRegister" ref="sericeAddressRegister" />
+	</bean>
+	
+	<bean  class="com.smart.thrift.server.ThriftServiceServerFactory"
+		destroy-method="close">
+		<property name="service" ref="helloService" />
+		<property name="port" value="9001" />
 		<property name="version" value="1.0.0" />
 		<property name="weight" value="1" />
 		<property name="thriftServerAddressRegister" ref="sericeAddressRegister" />

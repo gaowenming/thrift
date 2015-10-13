@@ -10,7 +10,7 @@ package com.smart.thrift.client;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.smart.thrift.service.api.TSmartService.Iface;
+import com.smart.thrift.service.api.SmartService.Iface;
 
 /**
  * @Description 
@@ -26,15 +26,16 @@ public class SmartServiceTest {
         try {
             ApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-context-thrift-client.xml");
             Iface smartSerivce = (Iface) context.getBean("smartService");
+            com.smart.thrift.service.api.HelloService.Iface helloService = (com.smart.thrift.service.api.HelloService.Iface) context.getBean("helloService");
             try {
                 System.out.println(smartSerivce.getUserById(1));
+                helloService.sayHello();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 }

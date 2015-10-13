@@ -2,8 +2,8 @@ namespace java com.smart.thrift.service.api
 
 include "SmartTypes.thrift"
 
-service TSmartService{
+service SmartService{
 
-SmartTypes.TUser getUserById(i32 id)
+SmartTypes.User getUserById(i32 id)
 
 }
