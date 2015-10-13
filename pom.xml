@@ -9,5 +9,6 @@
     <module>thrift-api</module>
     <module>thrift-server</module>
     <module>thrift-client</module>
+    <module>thrift-support</module>
   </modules>
 </project>
