@@ -1,14 +1,12 @@
-/**
- * @Title SmartServiceTest.java
- * @Package com.smart.thrift.client
- * @author gaowenming
- * @date 2015年10月13日 上午11:48:18
- * @version V1.0
- */
 package com.smart.thrift.client;
 
 import javax.annotation.Resource;
 
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.TFramedTransport;
+import org.apache.thrift.transport.TSocket;
+import org.apache.thrift.transport.TTransport;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -32,6 +30,7 @@ public class SmartServiceTest {
     private HelloService.Iface helloService;
 
     /**
+     * zk发现服务
      * @Description 
      * @param args
      */
@@ -40,6 +39,25 @@ public class SmartServiceTest {
         try {
             helloService.sayHello();
             System.out.println(smartSerivce.getUserById(1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 普通rpc调用
+     * @Description
+     */
+    @Test
+    public void testSimple() {
+        try {
+            TSocket socket = new TSocket("127.0.0.1", 9001);
+            TTransport transport = new TFramedTransport(socket);
+            TProtocol protocol = new TBinaryProtocol(transport);
+            HelloService.Client client = new HelloService.Client(protocol);
+            transport.open();
+            client.sayHello();
+            transport.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
