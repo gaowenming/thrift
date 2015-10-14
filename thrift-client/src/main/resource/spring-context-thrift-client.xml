@@ -11,7 +11,7 @@
 	<!-- zookeeper -->
 	<bean id="thriftZookeeper" class="com.smart.thrift.server.zookeeper.ZookeeperFactory"
 		destroy-method="close">
-		<property name="zkHosts" value="127.0.0.1:2181" />
+		<property name="zkHosts" value="localhost:2181" />
 		<property name="namespace" value="com.smart.thrift.server" />
 		<property name="connectionTimeout" value="3000" />
 		<property name="sessionTimeout" value="3000" />

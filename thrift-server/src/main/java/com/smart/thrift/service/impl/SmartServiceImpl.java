@@ -7,14 +7,14 @@ package com.smart.thrift.service.impl;
 
 import org.apache.thrift.TException;
 
-import com.smart.thrift.service.api.SmartService.Iface;
+import com.smart.thrift.service.api.SmartService;
 import com.smart.thrift.service.struct.User;
 
 /**
  * @Description 
  * @author gaowenming
  */
-public class SmartServiceImpl implements Iface {
+public class SmartServiceImpl implements SmartService.Iface {
 
     /**
      * @Description 
@@ -25,7 +25,7 @@ public class SmartServiceImpl implements Iface {
     @Override
     public User getUserById(int id) throws TException {
         System.out.println("server start ,id= " + id);
-        return new User(1,"name","pass");
+        return new User(1, "name", "pass");
     }
 
 }

@@ -9,13 +9,13 @@ package com.smart.thrift.service.impl;
 
 import org.apache.thrift.TException;
 
-import com.smart.thrift.service.api.HelloService.Iface;
+import com.smart.thrift.service.api.HelloService;
 
 /**
  * @Description 
  * @author gaowenming
  */
-public class HelloServiceImpl implements Iface {
+public class HelloServiceImpl implements HelloService.Iface {
 
     /**
      * @Description 
