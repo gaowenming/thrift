@@ -1,5 +1,6 @@
 package com.smart.thrift.server;
 
+import java.io.Closeable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -19,7 +20,7 @@ import com.smart.thrift.server.zookeeper.ThriftServerAddressProvider;
  * 客户端代理
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ThriftServiceClientProxyFactory implements FactoryBean, InitializingBean {
+public class ThriftServiceClientProxyFactory implements FactoryBean, InitializingBean,Closeable {
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -114,10 +115,22 @@ public class ThriftServiceClientProxyFactory implements FactoryBean, Initializin
 	public boolean isSingleton() {
 		return true;
 	}
-
+	
+	@Override
 	public void close() {
+		if(pool!=null){
+			try {
+				pool.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		if (serverAddressProvider != null) {
-			serverAddressProvider.close();
+			try {
+				serverAddressProvider.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
